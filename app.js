@@ -3,7 +3,24 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const request = require("request");
 const fs = require("fs");
+
 let miniMapUrl;
+let lat;
+let lng;
+let altitude;
+let coords;
+let timeUpdated = new Date();
+
+let dateOptions = {
+  weekday: "short",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  hour: "numeric",
+  minute: "numeric",
+  timeZone: config.timezone
+};
+
 client.on("ready", () => {
   client
     .generateInvite([
@@ -49,20 +66,11 @@ client.on("message", message => {
           );
           return;
         } else {
-          let lat = data.entries[0].lat;
-          let lng = data.entries[0].lng;
-          let altitude = data.entries[0].altitude;
-          let coords = `${lat},${lng}`;
-          let timeUpdated = new Date(data.entries[0].time * 1000);
-          let dateOptions = {
-            weekday: "short",
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-            hour: "numeric",
-            minute: "numeric",
-            timeZone: config.timezone
-          };
+          lat = data.entries[0].lat;
+          lng = data.entries[0].lng;
+          altitude = data.entries[0].altitude;
+          coords = `${lat},${lng}`;
+          timeUpdated = new Date(data.entries[0].time * 1000);
           miniMapUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${coords}&zoom=13&size=600x300&maptype=roadmap&markers=color:blue|${coords}&key=${
             config.gmaps_token
           }`;
