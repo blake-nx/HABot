@@ -38,6 +38,10 @@ client.on("message", message => {
         config.aprs_token
       }&format=json`,
       function(error, res, body) {
+        if (error) {
+          console.log(error);
+          return;
+        }
         let data = JSON.parse(body);
         if (data.found === 0) {
           message.channel.send(
@@ -64,7 +68,7 @@ client.on("message", message => {
           }`;
           request(miniMapUrl).pipe(fs.createWriteStream("minimap.jpg"));
           let locationEmbed = new Discord.RichEmbed()
-            .setColor("#500000")
+            .setColor(config.embed_color)
             .setAuthor("HABOT")
             .addField("Coordinates", coords)
             .addField(
@@ -84,6 +88,5 @@ client.on("message", message => {
       }
     );
   }
-  return;
 });
 client.login(config.token);
