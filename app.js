@@ -4,6 +4,7 @@ const client = new Discord.Client();
 const request = require("request");
 const fs = require("fs");
 
+let callsign;
 let miniMapUrl;
 let lat;
 let lng;
@@ -48,9 +49,9 @@ client.on("message", message => {
     .split(/ +/g);
   const command = args.shift();
   if (command === "call") {
-    let callsign = args.join("").toLowerCase();
+    callsign = args.join("").toLowerCase();
     console.log(callsign);
-    const getBallooonCoords = request.get(
+    request.get(
       `https://api.aprs.fi/api/get?name=${callsign}&what=loc&apikey=${
         config.aprs_token
       }&format=json`,
