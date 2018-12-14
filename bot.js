@@ -22,6 +22,11 @@ let dateOptions = {
   timeZone: config.timezone
 };
 
+client.on("error", () => {
+  console.log(error);
+  return;
+});
+
 client.on("ready", () => {
   client
     .generateInvite([
