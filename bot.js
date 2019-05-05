@@ -55,7 +55,7 @@ client.on("message", message => {
   const command = args.shift();
   if (command === "call") {
     callsign = args.join("").toLowerCase();
-    console.log(callsign);
+    console.log(`user requested ${callsign}`);
     request.get(
       `https://api.aprs.fi/api/get?name=${callsign}&what=loc&apikey=${
         config.aprs_token
@@ -80,7 +80,7 @@ client.on("message", message => {
           miniMapUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${coords}&zoom=13&size=600x300&maptype=roadmap&markers=color:blue|${coords}&key=${
             config.gmaps_token
           }`;
-          request(miniMapUrl).pipe(fs.createWriteStream("minimap.jpg"));
+          // request(miniMapUrl).pipe(fs.createWriteStream("minimap.jpg"));
           let locationEmbed = new Discord.RichEmbed()
             .setColor(config.embed_color)
             .setAuthor("HABOT")
