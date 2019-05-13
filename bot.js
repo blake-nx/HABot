@@ -22,8 +22,8 @@ let dateOptions = {
   timeZone: config.timezone
 };
 
-client.on("error", () => {
-  console.log(error);
+client.on("error", e => {
+  console.error("error occurred");
   return;
 });
 
