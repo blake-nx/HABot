@@ -43,7 +43,7 @@ client.on("ready", () => {
       client.channels.size
     } channels of ${client.guilds.size} guilds.`
   );
-  client.user.setActivity("Balloons", { type: "Watching" });
+  return client.user.setActivity("Balloons", { type: "Watching" });
 });
 client.on("message", message => {
   if (message.author.bot) return;
@@ -101,6 +101,7 @@ client.on("message", message => {
         }
       }
     );
+    return;
   }
 });
 client.login(config.token);
