@@ -95,7 +95,8 @@ client.on("message", message => {
               `https://www.google.com/maps/search/?api=1&query=${coords}`
             )
             .setImage(miniMapUrl)
-            .setTimestamp();
+            .setTimestamp()
+            .setFooter("Data sourced from https://aprs.fi/");
           message.channel.send({ embed: locationEmbed });
           return;
         }
